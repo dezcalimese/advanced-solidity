@@ -19,5 +19,14 @@
   - If you take `not` of something that isn't zero, it is going to essentially flip all of the bits & you will get a nonzero value back
 - If statements don't have `else`, so to check out other scenarios you have to explicitly check them
 ## Storage Slots
+- Key opcodes we need to know for storage are SLOAD and SSTORE
+- `.slot` is the actual memory location of where a variable is
+  - Ex. `ret := x.slot` will not return the value, it will return where it is
+  - To show the value, you actually need to run `ret := sload(x.slot)
+- `.slot` is determined sequentially
+- You can write to an arbitrary location, and if you were to write to a location e.g. where the owner of the contract is stored and someone changes it to be a different owner, there would be a serious security issue
+- `.sstore` allows you to store into a given slot a new value
+- `(variable name).slot` is determined at compile time and never changes
+- If two variables are in the same slot, e.g. two `uint128`'s, to load each value you can return `bytes32` instead of `uint256` 
 ## Storage Offsets and Bitshifting
 ## Storage of Arrays and Mappings
