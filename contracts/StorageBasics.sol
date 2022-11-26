@@ -18,7 +18,11 @@ contract StorageBasics {
         assembly {
             ret := sload(x.slot)
         }
+<<<<<<< HEAD
     }
+=======
+    } 
+>>>>>>> bd144501499b06e75faabf8f29369d13de85cc20
 
     function getVarYul(uint256 slot) external view returns (uint256 ret) {
         assembly {

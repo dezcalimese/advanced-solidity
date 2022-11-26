@@ -28,8 +28,11 @@
 - `.sstore` allows you to store into a given slot a new value
 - `(variable name).slot` is determined at compile time and never changes
 - If two variables are in the same slot, e.g. two `uint128`'s, to load each value you can return `bytes32` instead of `uint256` 
+<<<<<<< HEAD
 ## Storage Offsets and Bitshifting 
 ## Storage of Arrays and Mappings
 =======
+=======
+>>>>>>> bd144501499b06e75faabf8f29369d13de85cc20
 ## Storage Offsets and Bitshifting
 ## Storage of Arrays and Mappings
