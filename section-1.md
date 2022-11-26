@@ -30,6 +30,8 @@
 - If two variables are in the same slot, e.g. two `uint128`'s, to load each value you can return `bytes32` instead of `uint256` 
 <<<<<<< HEAD
 ## Storage Offsets and Bitshifting 
+- Shift right `shr` takes the number of bits you want to shift by as an argument, not bytes 
+- 
 ## Storage of Arrays and Mappings
 =======
 =======

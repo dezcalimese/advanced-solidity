@@ -18,7 +18,6 @@ contract StorageBasics {
         assembly {
             ret := sload(x.slot)
         }
-<<<<<<< HEAD
     }
 =======
     } 
