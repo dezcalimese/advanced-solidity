@@ -44,6 +44,30 @@
 - If you used `mstore8` instead, then only the 0th slot will be written to and the 7 would be put into slot 0
   - The other bytes in front of it would be untouched
 ## How Solidity Uses Memory
+- Solidity allocates slots `[0x00-0x20]`, `[0x20-0x40]` as "scratch space"
+  - Can just write values here and expect them to be emphemeral
+  - Can also mean a previous operation left a value here
+  - If you're writing in 32 byte increments it's going to overwrite whatever slot you're writing into
+- Solidity reserves slot `[0x40]` as the "free memory pointer"
+  - If you want to write something new to memory, this is where you'd start writing it to
+  - Will never decrement as the transcation progresses
+- Solidity keeps slot `[0x60]` empty
+- The action begins in slot `[0x80-]`
+  - Writing to structs, arrays etc will begin here
+- Solidity uses memory for
+  - `abi.encode` and `abi.encodePacked` 
+  - Structs and arrays (but you explicitly need the `memory` keyword)
+  - When structs and arrays are declared `memory` in function arguments
+    - Memory allocated when it's set to be the modifier for the function argument
+  - Because objects in memory are laid out end to end according to where free memory pointer is pointing
+    - After a new object is written, the free memory pointer is set to point ahead of that 
+    - Memory arrays have no `push` like storage
+- In Yul
+  - _The variable itself_ is where it begins in memory 
+  - To access a dynamic array, you have to add 32 bytes or 0x20 to skip the length
 ## Dangers of Memory Misuse
+- If you don't respect Solidity's memory layout and free memory pointer, you can get some serious bugs
+- The EVM memory does not try to pack datatypes smaller than 32 bytes
+- If you load from storage to memory, it wlll be unpacked
 ## Return, Require, Tuples, and Keccak256
 ## Logs and Events
