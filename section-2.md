@@ -70,4 +70,16 @@
 - The EVM memory does not try to pack datatypes smaller than 32 bytes
 - If you load from storage to memory, it wlll be unpacked
 ## Return, Require, Tuples, and Keccak256
+- Memory allows us to deal with data types that are larger than 32 bytes
+- `return` in Yul returns an area of memory specified by the arguments
+- When you want to revert an execution, you also need to specify an area in memory to return 
+  - In a `revert` case, it's still possible to return data so that the calling function can respond to it and do something about it 
+  - Most of the time though, `revert` is used if you want execution to stop, and not trying to return data
+- In Solidity, `keccak256` takes a variable that is of type `bytes memory`
+  - Yul takes its arguments as the starting point in memory and how many bytes you want to hash as part of its arguments
+- With `return`, youre passing in the explicit memory addresses for beginning and the end
+  - In hashing w `keccak256`, you're supplying the beginning and how many bytes total   
+- Also with `return`, the compiler is not going to enforce that you're return signature matches what is inside of `return` 
 ## Logs and Events
+- Emitting a log that has two indexed arguments in Yul takes the `keccak256` of an indexed event (for ex.) and uses that as the first entry inside of the indexed arguments, and supplies the logged information after that
+- For logs with one indexed argument and a non indexed argument in another, you have to put the non indexed argument in memory 
